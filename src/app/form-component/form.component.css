@@ -1,0 +1,61 @@
+::ng-deep.container {
+  max-width: 800px;
+  margin: 50px auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+::ng-deep h2 {
+  text-align: center;
+  color: #333;
+}
+
+::ng-deep form {
+  display: grid;
+  gap: 10px;
+}
+
+::ng-deep label {
+  font-weight: bold;
+}
+
+::ng-deep input[type="text"],
+::ng-deep input[type="date"] {
+  width: calc(100% - 10px);
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+::ng-deep p-calendar {
+  position: relative;
+  display: inline-flex;
+  max-width: calc(100% + 20px); /* Increase by 20px */
+  margin-top: 10px;
+}
+
+::ng-deep p-button {
+  justify-self: end;
+}
+
+::ng-deep input{
+  margin-top: 10px;
+}
+
+::ng-deep .task-heading {
+  font-family: Arial, sans-serif;
+  font-size: 40px;
+  color: #333;
+  border-bottom: 2px solid #333;
+  padding-bottom: 5px;
+}
+
+::ng-deep .p-inputswitch .p-inputswitch-slider {
+  background: red;
+}
+
+::ng-deep .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
+  background: #28a745;
+}

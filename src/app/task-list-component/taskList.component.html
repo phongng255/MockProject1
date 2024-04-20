@@ -1,0 +1,69 @@
+<div class="header">
+    <h1 class="left">
+        Date Now: {{currentDate | date:'MM/dd/yyyy HH:mm:ss'}}
+    </h1>
+    <h1 class="right">
+        Actual Date: {{getTotalDeviation()}}
+    </h1>
+</div>
+<p-pickList [source]="tasks" [target]="targetTask" [sourceHeader]="'To Do'" [targetHeader]="'Done Task'"
+    [dragdrop]="true" [responsive]="false" [sourceStyle]="{'height':'30rem'}" [targetStyle]="{'height':'30rem'}"
+    filterBy="name" (onMoveToTarget)="onMoveToTarget($event)" (onMoveToSource)="onMoveToSource($event)"
+    metaKeySelection="true">
+    <ng-template let-tasks pTemplate="item">
+        <div class="product-item">
+            <div class="image-container" (mouseenter)="showModelPreview(tasks)" (mouseleave)="hideModelPreview()">
+                <img src="https://media4.giphy.com/media/6pNyPn7KbMbijMEDf8/giphy.webp" [alt]="tasks.taskName"
+                    class="product-image" />
+            </div>
+            <div class="product-list-detail">
+                <div class="d-flex align-items-center">
+                    @if(tasks.status){
+                    <p-badge class="mb-2 custom-badge" [value]="'Done'" severity="success" styleClass="mr-2"></p-badge>
+                    }
+                    @else{
+                    <p-badge class="mb-2 custom-badge" [value]="'Progress'" severity="warning"
+                        styleClass="mr-2"></p-badge>
+                    }
+                    <h3 class="mb-2 long-text">{{tasks.taskName}}</h3>
+                </div>
+                <i class="pi pi-spin pi-cog" style="font-size: 1rem; margin-right: 5px;"></i>
+                <span class="product-category">{{tasks.description}}</span>
+                @if(tasks.status){
+                <h5 class="mb-2 long-text">Actual Date: {{tasks.actualDate | date : 'dd/MM/yyyy'}}</h5>
+                <h5 class="mb-2 long-text">Deviation: {{ getDeviation(tasks) }}</h5>
+                }
+            </div>
+            <div class="product-list-action">
+                <div class="icon-row">
+                    <span [style]="{width: '20px', height: '20px'}">{{tasks.dueDate | date : 'dd/MM/yyyy' }}</span>
+                </div>
+                <div class="icon-row" *ngIf="!tasks.status">
+                    <i class="pi pi-pencil" (click)="editTask(tasks)"></i>
+                    <i class="pi pi-trash" (click)="deleteTask(tasks)"></i>
+                    <i class="pi pi-check" (click)="doneTask(tasks)"></i>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</p-pickList>
+
+@if(displayBasic)
+{
+<div>
+    <p-dialog header="Task" [visible]="displayBasic" [style]="{width: '42vw'}">
+        <div class="form-group">
+            <label for="taskName">Task name:</label>
+            <input type="text" pInputText [value]="taskHover.taskName" id="taskName" name="taskName" style="margin-bottom: 10px; display: block;" readonly />
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea rows="5" cols="78" pInputTextarea pInputText [value]="taskHover.description" id="description" name="description" style="margin-bottom: 10px; display: block;" readonly></textarea>
+        </div>
+        <div class="form-group">
+            <label for="date" style="display:block">Date:</label>
+            <input type="text" pInputText [value]="taskHover.dueDate | date:'MM/dd/yyyy HH:mm:ss'" id="date" name="date" style="margin-bottom: 10px; display: block;" readonly>
+        </div>
+    </p-dialog>
+</div>
+}
