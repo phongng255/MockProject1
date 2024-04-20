@@ -7,7 +7,7 @@
     </h1>
 </div>
 <p-pickList [source]="tasks" [target]="targetTask" [sourceHeader]="'To Do'" [targetHeader]="'Done Task'"
-    [dragdrop]="true" [responsive]="false" [sourceStyle]="{'height':'30rem'}" [targetStyle]="{'height':'30rem'}"
+    [dragdrop]="true" [responsive]="true" [sourceStyle]="{'height':'30rem'}" [targetStyle]="{'height':'30rem'}"
     filterBy="name" (onMoveToTarget)="onMoveToTarget($event)" (onMoveToSource)="onMoveToSource($event)"
     metaKeySelection="true">
     <ng-template let-tasks pTemplate="item">
