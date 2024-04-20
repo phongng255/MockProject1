@@ -28,10 +28,6 @@ export class TaskListComponent {
       if (element.status == false) this.tasks.push(element);
       else this.targetTask.push(element);
     });
-
-    for (let index = 0; index < 3000; index++) {
-        this.tasks.push(new Task(index.toString()));      
-    }
   }
 
   callParentFunction() {
