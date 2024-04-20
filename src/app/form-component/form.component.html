@@ -3,34 +3,37 @@
   <h2 [ngStyle]="{ 'border-bottom': '2px solid #333' }" [class.task-heading]="true">Task</h2>
   <form #taskForm="ngForm">
     <div class="form-group">
-      <label for="taskName">Task name:</label>
-      <input type="text" pInputText [(ngModel)]="task.taskName" id="taskName" name="taskName" required #taskName="ngModel" style="margin-bottom: 10px;"/>
+      <label for="taskName" style="margin-bottom: 10px; display: block;">Task name:</label>
+      <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+      <input class="inputtext" type="text" pInputText [(ngModel)]="task.taskName" id="taskName" name="taskName" required #taskName="ngModel"/>
+      </span>
       @if(taskName.invalid && (taskName.dirty || taskName.touched)){
         <div *ngIf="taskName.errors?.['required']" [style.color]="'red'">Task name is required.</div>
       }
     </div>
     <div class="form-group">
       <label for="description">Description:</label>
-      <textarea  type="text" rows="5" cols="99" pInputTextarea [(ngModel)]="task.description" id="description" name="description" required #description="ngModel" style="margin-bottom: 10px; display: block;"></textarea>
+      <textarea class="text-input" type="text" rows="5" pInputTextarea [(ngModel)]="task.description" id="description" name="description" required #description="ngModel" style="margin-bottom: 10px; display: block;"></textarea>
       @if(description.invalid && (description.dirty || description.touched)){
         <div *ngIf="description.errors?.['required']" [style.color]="'red'">Description is required.</div>
       }
     </div>
     <div class="form-group">
       <label for="date">Date:</label> <br>
-      <p-calendar [(ngModel)]="task.dueDate" [showTime]="true" [showSeconds]="true" inputId="time" id="date" name="date" required #description="ngModel" [ngClass]="{'margin-bottom-10': true}"></p-calendar>
+      <p-calendar [showIcon]="true" [(ngModel)]="task.dueDate" [showTime]="true" [showSeconds]="true" inputId="time" id="date" name="date" required #description="ngModel" [ngClass]="{'margin-bottom-10': true}"></p-calendar>
       @if(task.dueDate === null || task.dueDate === undefined)
       {
         <div [style.color]="'red'">Date is required.</div>
       }
     </div>
     <div style="display: flex; justify-content: flex-end;">
-      <button pButton pRipple type="button" icon="pi pi-trash" label="CLEAR" class="p-button-warning" (click)="resetValueForm(false)" [ngStyle]="{'margin-right.px': 5}" [disabled]="!enableCreateButton()"></button>
+      <p-button label="Secondary" [outlined]="true" severity="secondary" icon="pi pi-trash" label="CLEAR" class="p-button-warning" (click)="resetValueForm(false)" [ngStyle]="{'margin-right.px': 5}" [disabled]="!enableCreateButton()"></p-button>
       @if(isEditMode){
-        <button pButton pRipple type="button" icon="pi pi-check" label="Success" class="p-button-success" (click)="saveTask()" [disabled]="!enableCreateButton()"></button>
+        <p-button label="CREATE" [outlined]="true" severity="success" icon="pi pi-check" label="CREATE" class="p-button-success" (click)="saveTask()" [disabled]="!enableCreateButton()"></p-button>
       }
       @else {
-        <p-button label="UPDATE" icon="pi pi-user-edit" [rounded]="false" severity="Primary" (click)="updateItem()" [disabled]="!enableCreateButton()"></p-button>
+        <p-button label="UPDATE" [outlined]="true" severity="warning" icon="pi pi-user-edit" [rounded]="false" severity="Primary" (click)="updateItem()" [disabled]="!enableCreateButton()"></p-button>
       }
     </div>
   </form>

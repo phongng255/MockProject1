@@ -22,7 +22,8 @@ import { DialogModule } from 'primeng/dialog';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { TaskListComponent } from './task-list-component/taskListComponent'
-import { CallFunctionServiceService } from './callFunctionService.service'
+import { CallFunctionServiceService } from '../service/callFunctionService'
+import { RippleModule } from 'primeng/ripple';
 
 // List of PrimeNG modules
 const PrimeNGModules = [
@@ -35,10 +36,11 @@ const PrimeNGModules = [
   ListboxModule,
   ToastModule,
   BadgeModule,
-  SelectButtonModule, 
+  SelectButtonModule,
   DialogModule,
   IconFieldModule,
-  InputIconModule
+  InputIconModule, 
+  RippleModule
 ]
 
 @NgModule({

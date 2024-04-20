@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core'
-import { Task } from '../../model/task'
+import { Task } from '../../data/task'
 import { MessageService } from 'primeng/api'
 import { NgForm } from '@angular/forms'
 import * as uuid from 'uuid';
-import { CallFunctionServiceService } from '../callFunctionService.service';
+import { CallFunctionServiceService } from '../../service/callFunctionService';
 
 @Component({
   selector: 'app-Task',
@@ -36,7 +36,6 @@ export class TaskComponent implements OnInit {
     if(flagChangeisEditMode){
       this.isEditMode = true;
     }
-    // this.isEditMode = true;
   }
 
   enableCreateButton(): boolean {

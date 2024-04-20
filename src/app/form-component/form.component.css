@@ -21,18 +21,19 @@
   font-weight: bold;
 }
 
-::ng-deep input[type="text"],
+/* ::ng-deep input[type="text"],
 ::ng-deep input[type="date"] {
   width: calc(100% - 10px);
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 5px;
-}
+} */
 
 ::ng-deep p-calendar {
   position: relative;
   display: inline-flex;
-  max-width: calc(100% + 20px); /* Increase by 20px */
+  max-width: calc(100% + 20px);
+  /* Increase by 20px */
   margin-top: 10px;
 }
 
@@ -40,8 +41,12 @@
   justify-self: end;
 }
 
-::ng-deep input{
+::ng-deep .text-input {
   margin-top: 10px;
+  width: calc(100% - 10px);
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
 ::ng-deep .task-heading {
@@ -58,4 +63,26 @@
 
 ::ng-deep .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
   background: #28a745;
+}
+
+::ng-deep textarea {
+  width: 100%;
+  resize: none;
+  font-size: 16px;
+
+  font-family: var(--font-family);
+  font-feature-settings: var(--font-feature-settings, normal);
+  font-size: 1rem;
+  color: #334155;
+}
+
+
+::ng-deep .p-input-icon-left,
+::ng-deep .p-input-icon-right {
+  width: 100%;
+}
+
+::ng-deep .inputtext {
+  padding-left: 35px !important;
+  width: 99%;
 }

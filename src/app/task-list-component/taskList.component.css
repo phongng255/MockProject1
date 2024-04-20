@@ -134,7 +134,7 @@
 }
 
 
-.container {
+::ng-deep .container {
     max-width: 800px;
     margin: 50px auto;
     background-color: #fff;
@@ -143,22 +143,22 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-h2 {
+::ng-deep h2 {
     text-align: center;
     color: #333;
 }
 
-form {
+::ng-deep form {
     display: grid;
     gap: 10px;
 }
 
-label {
+::ng-deep label {
     font-weight: bold;
 }
 
-input[type="text"],
-input[type="date"],
+::ng-deep input[type="text"],
+::ng-deep input[type="date"],
 button {
     width: calc(100% - 10px);
     padding: 8px;
@@ -181,7 +181,7 @@ button {
     background-color: #0056b3;
   } */
 
-p-calendar {
+::ng-deep p-calendar {
     position: relative;
     display: inline-flex;
     max-width: calc(100% + 20px);
@@ -189,20 +189,20 @@ p-calendar {
     margin-top: 10px;
 }
 
-p-button {
+::ng-deep p-button {
     justify-self: end;
 }
 
-input {
+/* ::ng-deep input {
     margin-top: 10px;
-}
+} */
 
 button {
     min-width: 10rem;
     margin-right: .5rem;
 }
 
-.task-heading {
+::ng-deep .task-heading {
     font-family: Arial, sans-serif;
     font-size: 40px;
     color: #333;
@@ -210,13 +210,105 @@ button {
     padding-bottom: 5px;
 }
 
-::ng-deep .header{
+::ng-deep .header {
     display: flex;
     align-items: center;
     justify-content: space-around;
 }
 
 ::ng-deep .header .left,
-::ng-deep .header .right{
+::ng-deep .header .right {
     width: 47%;
+}
+
+::ng-deep textarea {
+    width: 99%;
+    resize: none;
+    font-size: 16px;
+
+    font-family: var(--font-family);
+    font-feature-settings: var(--font-feature-settings, normal);
+    font-size: 1rem;
+    color: #334155;
+}
+
+::ng-deep .product-item {
+    display: flex;
+    align-items: center;
+    padding: .5rem;
+    width: 100%;
+}
+
+::ng-deep .product-item img {
+    width: 75px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    margin-right: 1rem;
+}
+
+::ng-deep .product-item .product-list-detail {
+    flex: 1 1 0;
+    /* max-width: 600px; */
+}
+
+::ng-deep .product-item .product-list-action {
+
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+::ng-deep .product-item .product-category-icon {
+    vertical-align: middle;
+    margin-right: .5rem;
+}
+
+::ng-deep .product-item .product-category {
+    vertical-align: middle;
+    line-height: 1;
+}
+
+@media screen and (max-width: 576px) {
+    .product-item {
+        flex-wrap: wrap;
+    }
+
+    .product-item .image-container {
+        width: 100%;
+        text-align: center;
+    }
+
+    .product-item img {
+        margin: 0 0 1rem 0;
+        width: 100px;
+    }
+}
+
+::ng-deep .custom-badge {
+    position: relative;
+    bottom: -10px;
+    float: right;
+    margin-left: 5px
+}
+
+::ng-deep .p-picklist-filter-container {
+    display: none;
+}
+
+::ng-deep .p-picklist-buttons>button:nth-child(1),
+::ng-deep .p-picklist-buttons>button:nth-child(2),
+::ng-deep .p-picklist-buttons>button:nth-child(3),
+::ng-deep .p-picklist-buttons>button:nth-child(4) {
+    display: none;
+}
+
+::ng-deep .d-flex {
+    display: flex !important;
+    align-items: center;
+}
+
+::ng-deep .text-input {
+    margin-top: 10px;
+    width: calc(100% - 10px);
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }

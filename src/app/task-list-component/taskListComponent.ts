@@ -1,9 +1,9 @@
-import { Component, EventEmitter, Output, ViewChild, viewChild } from '@angular/core'
+import { Component, EventEmitter, Output } from '@angular/core'
 import { PickListMoveToSourceEvent, PickListMoveToTargetEvent } from 'primeng/picklist'
-import { ConfirmationService, MessageService } from 'primeng/api'
-import { Task } from '../../model/task';
-import { TASKLIST } from '../../model/data';
-import { CallFunctionServiceService } from '../callFunctionService.service';
+import { MessageService } from 'primeng/api'
+import { Task } from '../../data/task';
+import { TASKLIST } from '../../data/data';
+import { CallFunctionServiceService } from '../../service/callFunctionService';
 
 @Component({
   selector: 'app-TaskList',
@@ -12,7 +12,6 @@ import { CallFunctionServiceService } from '../callFunctionService.service';
 })
 export class TaskListComponent {
   @Output() messageEvent = new EventEmitter<Task>()
-
   tasks: Task[] = [];
   targetTask: Task[] = [];
   displayBasic: boolean = false;
@@ -30,10 +29,6 @@ export class TaskListComponent {
     });
   }
 
-  callParentFunction() {
-    this.callFunctionServiceService.callFunction();
-  }
-
   async deleteTask(task: Task): Promise<void> {
     const confirmed = await this.callFunctionServiceService.confirmWithMessage('Are you sure?', 'Confirmation')
     if (!confirmed) {
@@ -43,7 +38,7 @@ export class TaskListComponent {
     if (findTaskIndex !== -1) {
       this.tasks.splice(findTaskIndex, 1)
       this.tasks = this.tasks.slice();
-      this.callParentFunction();
+      this.callFunctionServiceService.callFunction();
       this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Delete Item Successfully' })
     } else {
       this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Item not found' })
@@ -62,8 +57,8 @@ export class TaskListComponent {
     }
   }
 
-  async onMoveToTarget($event: PickListMoveToTargetEvent): Promise<void> {
-    const itemMoveToTarget = $event.items.shift()
+  async onMoveToTarget(event: PickListMoveToTargetEvent): Promise<void> {
+    const itemMoveToTarget = event.items.shift()
     if (itemMoveToTarget) {
       const existingTaskIndex = this.targetTask.findIndex((item) => item.id === itemMoveToTarget.id)
       if (existingTaskIndex !== -1) {
@@ -84,19 +79,11 @@ export class TaskListComponent {
     this.tasks = this.tasks.slice();
   }
 
-  async editTask(task: Task): Promise<void> {
-    const confirmed = await this.callFunctionServiceService.confirmWithMessage('Are you sure?', 'Confirmation')
-    if (!confirmed) {
-      return;
-    }
+  editTask(task: Task): void {
     this.messageEvent.emit({ ...task });
   }
 
-  async doneTask(task: Task): Promise<void> {
-    const confirmed = await this.callFunctionServiceService.confirmWithMessage('Are you sure?', 'Confirmation')
-    if (!confirmed) {
-      return;
-    }
+  doneTask(task: Task): void {
     if (task) {
       const findTaskIndex = this.tasks.findIndex((item) => item.id === task.id)
       if (findTaskIndex !== -1) {
@@ -104,7 +91,8 @@ export class TaskListComponent {
         task.actualDate = new Date()
         this.tasks.splice(findTaskIndex, 1)
         this.targetTask = [...this.targetTask, task]
-        this.callParentFunction();
+        this.callFunctionServiceService.callFunction();
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Done Task Successfully' })
       }
     }
   }
